@@ -7,11 +7,11 @@ app = Flask(__name__, static_url_path='')
 # by default it's /static
 
 @app.route("/")
-def view():
+def home():
     # show a home page
     pass
 
-@app.route("/upload", method=["GET", "POST"])
+@app.route("/upload")
 def upload():
     # upload an image into the database
     pass
