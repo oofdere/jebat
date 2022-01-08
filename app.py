@@ -6,10 +6,11 @@ app = Flask(__name__, static_url_path='')
 # static_url_path sets the path static files are served from
 # by default it's /static
 
-@app.route("/")
-def home():
+@app.route("/<name>")
+def home(name):
     # show a home page
-    pass
+    # name = request.args.get("name")
+    return render_template("home.html", name=name)
 
 @app.route("/upload")
 def upload():
