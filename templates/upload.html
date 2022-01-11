@@ -1,0 +1,12 @@
+<form action="/upload" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.file.label }}
+        {{ form.file() }}
+    </p>
+    <p>
+        {{ form.caption.label }}
+        {{ form.caption() }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>

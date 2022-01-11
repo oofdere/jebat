@@ -1,0 +1,16 @@
+<form action="/signup" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}
+        {{ form.username() }}
+    </p>
+    <p>
+        {{ form.password.label }}
+        {{ form.password() }}
+    </p>
+    <p>
+        {{ form.password2.label }}
+        {{ form.password2() }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
