@@ -1,3 +1,6 @@
+{% extends "default.html" %}
+
+{% block content %}
 <form action="/login" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p>
@@ -11,3 +14,4 @@
     <p>{{ form.remember() }} {{ form.remember.label }}</p>
     <p>{{ form.submit() }}</p>
 </form>
+{% endblock %}

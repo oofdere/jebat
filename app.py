@@ -21,7 +21,7 @@ from forms import *
 @login_required
 def home():
     # show a home page
-    return 'Logged in. <a href="logout">Log out?</a>'
+    return render_template("home.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -56,6 +56,7 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/upload", methods=["GET", "POST"])
+@login_required
 def upload():
     form = UploadForm()
     if request.method == "POST":

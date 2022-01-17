@@ -1,3 +1,6 @@
+{% extends "default.html" %}
+
+{% block content %}
 <form action="/upload" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <p>
@@ -10,3 +13,4 @@
     </p>
     <p>{{ form.submit() }}</p>
 </form>
+{% endblock %}
