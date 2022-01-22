@@ -1,11 +1,15 @@
 import os
+from datetime import datetime
+
+import flask_login
+
 from helpers import env
 
 from flask import Flask, flash, render_template, redirect, request, url_for, flash
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path='/images')
 # static_url_path sets the path static files are served from
 # by default it's /static
 app.config["SQLALCHEMY_DATABASE_URI"] = env("SQLALCHEMY_DATABASE_URI")
@@ -14,14 +18,18 @@ app.config["SECRET_KEY"] = env("SECRET_KEY")
 login = LoginManager(app)
 login.login_view = "login"
 from models import *
+
 db.init_app(app)
 from forms import *
+import hashlib
+
 
 @app.route("/")
 @login_required
 def home():
     # show a home page
     return render_template("home.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -35,6 +43,7 @@ def login():
         login_user(user, remember=form.remember.data)
         return redirect(url_for("home"))
     return render_template("login.html", form=form)
+
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -50,10 +59,12 @@ def signup():
         return redirect(url_for("login"))
     return render_template("signup.html", form=form)
 
+
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for("login"))
+
 
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
@@ -63,23 +74,33 @@ def upload():
         if form.validate_on_submit():
             f = form.file.data
             filename = secure_filename(f.filename)
+            extension = filename.split('.')[1]
+            image_hash = hashlib.md5(f.read()).hexdigest()
+            filename = image_hash + "." + extension
+            image = Image(hash=image_hash, extension=extension, caption=form.caption.data,
+                          date=datetime.now(), user_id=current_user.id)
+            db.session.add(image)
+            db.session.commit()
+            f.seek(0)
             f.save(os.path.join(app.root_path, env("IMAGE_DIR"), filename))
-            return "done"
+            return redirect(url_for('view', image_hash=image_hash))
     else:
         return render_template("upload.html", form=form)
 
-@app.route("/<int:image_id>")
-def view():
-    # show a single image
-    pass
+
+@app.route("/<image_hash>")
+def view(image_hash):
+    image = Image.query.filter_by(hash=image_hash).first()
+    return render_template("detail_view.html", image=image)
+
 
 @app.route("/pool/<int:pool_id>")
-def pool():
+def pool(pool_id):
     # show a collection of images
     pass
+
 
 @app.route("/search")
 def search():
     # search images by tags
     pass
-
