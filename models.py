@@ -10,6 +10,7 @@ db = SQLAlchemy()
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     hash = db.Column(db.Text, unique=True, nullable=False)
+    extension = db.Column(db.Text)
     caption = db.Column(db.Text)
     exif = db.Column(db.Text)
     date = db.Column(db.DateTime, nullable=False)
