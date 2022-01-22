@@ -1,11 +1,13 @@
 {% extends "default.html" %}
 
 {% block content %}
-    {% for image in images %}
-        <a href="{{ url_for('view', image_hash=image.hash) }}">
-            <img src="images/{{ image.hash }}.{{ image.extension }}" alt="{{ image.caption }}" width="750">
-            <p>{{ image.caption }}</p>
-        </a>
-        
-    {% endfor %}
+<div class="gallery">
+        {% for image in images %}
+        <div class="gallery-item">
+            <a href="{{ url_for('view', image_hash=image.hash) }}" data-tooltip="{{ image.caption }}">
+                <img src="images/{{ image.hash }}.{{ image.extension }}" alt="{{ image.caption }}" />
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}
