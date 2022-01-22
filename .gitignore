@@ -131,3 +131,6 @@ dmypy.json
 # Databases
 *.db
 photos/
+
+# Intellj
+.idea/
