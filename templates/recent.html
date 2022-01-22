@@ -1,0 +1,11 @@
+{% extends "default.html" %}
+
+{% block content %}
+    {% for image in images %}
+        <a href="{{ url_for('view', image_hash=image.hash) }}">
+            <img src="images/{{ image.hash }}.{{ image.extension }}" alt="{{ image.caption }}" width="750">
+            <p>{{ image.caption }}</p>
+        </a>
+        
+    {% endfor %}
+{% endblock %}

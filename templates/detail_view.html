@@ -1,5 +1,7 @@
 {% extends "default.html" %}
 
 {% block content %}
-    <img src="images/{{ image.hash }}.{{ image.extension }}" alt="view_image">
+    <img src="images/{{ image.hash }}.{{ image.extension }}" alt="view_image" width="750">
+    <p>{{ filename }}</p>
+    <p>{{ image.caption }}</p>
 {% endblock %}

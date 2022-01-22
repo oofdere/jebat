@@ -2,14 +2,15 @@ import os
 from datetime import datetime
 
 import flask_login
+from sqlalchemy import desc
 
 from helpers import env
 
-from flask import Flask, flash, render_template, redirect, request, url_for, flash
+from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__, static_url_path='/images')
+app = Flask(__name__)
 # static_url_path sets the path static files are served from
 # by default it's /static
 app.config["SQLALCHEMY_DATABASE_URI"] = env("SQLALCHEMY_DATABASE_URI")
@@ -27,8 +28,8 @@ import hashlib
 @app.route("/")
 @login_required
 def home():
-    # show a home page
-    return render_template("home.html")
+    images = Image.query.order_by(desc(Image.date)).all()
+    return render_template("recent.html", images=images)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -104,3 +105,6 @@ def pool(pool_id):
 def search():
     # search images by tags
     pass
+
+blueprint = Blueprint('images', __name__, static_url_path='/images', static_folder='images/')
+app.register_blueprint(blueprint)
