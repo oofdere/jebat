@@ -12,6 +12,17 @@ load_dotenv()
 def env(key):
     return os.getenv(key)
 
+# checks if checkbox is checked
+# html forms return "on" if a checkbox is checked
+# and nothing if it isn't
+# wonderful
+def is_checked(request, name):
+    name = request.form.get(name)
+    if name == "on":
+        return True
+    else:
+        return False
+
 # compress images for thumbnails
 @cli.command()
 def generate_thumbnail(image):
