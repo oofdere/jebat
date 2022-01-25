@@ -4,9 +4,11 @@ from datetime import datetime
 import flask_login
 from sqlalchemy import desc
 
+import thumbnail
+
 from helpers import env
 
-from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash
+from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash, send_file
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
 
@@ -20,6 +22,10 @@ login.login_view = "login"
 from models import *
 
 db.init_app(app)
+
+from flask_migrate import Migrate
+migrate = Migrate(app, db)
+
 from forms import *
 import hashlib
 
@@ -83,6 +89,7 @@ def upload():
             db.session.commit()
             f.seek(0)
             f.save(os.path.join(app.root_path, env("IMAGE_DIR"), filename))
+            thumbnail.create(filename)
             return redirect(url_for('view', image_hash=image_hash))
     else:
         return render_template("upload.html", form=form)
@@ -142,6 +149,10 @@ def pool(pool_id):
     # show a collection of images
     pass
 
+@app.route("/thumbnails/<filename>")
+def get_thumb(filename):
+    filepath = os.path.join(app.root_path, env("THUMB_DIR"), secure_filename(filename))
+    return send_file(filepath, mimetype='image/jpeg')
 
 @app.route("/search")
 def search():
