@@ -9,6 +9,7 @@ import thumbnail
 from helpers import env, is_checked
 
 from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash, send_file, abort
+
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
 
@@ -177,6 +178,7 @@ def admin():
     if user.is_admin:
         return "admin"
     return "not admin"
+
 
 @app.route("/roles", methods=["GET", "POST"])
 @login_required
