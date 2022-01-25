@@ -105,7 +105,7 @@ def pool(pool_id):
 
 @app.route("/thumbnails/<filename>")
 def get_thumb(filename):
-    filepath = os.path.join(app.root_path, env("THUMB_DIR"), filename)
+    filepath = os.path.join(app.root_path, env("THUMB_DIR"), secure_filename(filename))
     return send_file(filepath, mimetype='image/jpeg')
 
 @app.route("/search")
