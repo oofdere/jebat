@@ -25,8 +25,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         cp template.env .env
-    - name: Flask-Migrate
-      run: |
-        flask db init
-        flask db migrate
-        flask db upgrade
+    - name: Initialize database
+      run: flask db init
+    - name: Migrate database
+      run: flask db migrate
+    - name: Update database
+      run: flask db upgrade
