@@ -13,10 +13,8 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 # static_url_path sets the path static files are served from
 # by default it's /static
-# app.config["SQLALCHEMY_DATABASE_URI"] = env("SQLALCHEMY_DATABASE_URI")
-# app.config["SECRET_KEY"] = env("SECRET_KEY")
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.db"
-app.config["SECRET_KEY"] = "fortnite"
+app.config["SQLALCHEMY_DATABASE_URI"] = env("SQLALCHEMY_DATABASE_URI")
+app.config["SECRET_KEY"] = env("SECRET_KEY")
 login = LoginManager(app)
 login.login_view = "login"
 from models import *
