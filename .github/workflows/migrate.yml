@@ -33,6 +33,5 @@ jobs:
       run: |
         source env/bin/activate
         echo "VIRTUAL ENV:" $VIRTUAL_ENV
-        flask db init
         flask db migrate
         flask db upgrade
