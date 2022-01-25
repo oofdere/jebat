@@ -1,0 +1,16 @@
+{% extends "default.html" %}
+
+{% block content %}
+    <form action="/create_album" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.name.label }}
+        {{ form.name() }}
+    </p>
+    <p>
+        {{ form.description.label }}
+        {{ form.description() }}
+    </p>
+    <p>{{ form.create() }}</p>
+</form>
+{% endblock %}

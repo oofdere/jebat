@@ -8,6 +8,16 @@
     </aside>
     <div role="document">
         <img src="images/{{ image.hash }}.{{ image.extension }}" alt="view_image">
+        <form action="/album/add/{{ image.id }}" method="post">
+            <label for="album_chooser">Add to album:</label>
+            <input list="albums" id="album_chooser" name="choose_album" />
+            <datalist id="albums">
+                {% for album in albums %}
+                    <option value="{{ album.id }}">{{ album.name }}</option>
+                {% endfor %}
+            </datalist>
+            <button type="submit">Add to Album</button>
+        </form>
     <p>{{ filename }}</p>
     </div>
 {% endblock %}
