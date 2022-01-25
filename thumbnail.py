@@ -17,6 +17,7 @@ def create(imageName: str):
     else:
         new_height = 500
         new_width = 500
-    
+
     img.thumbnail((new_height, new_width))
-    img.save(os.path.join(thumb_dir + "/" + imageName), "JPEG")
+    img.convert("RGB")
+    img.save(os.path.join(thumb_dir + "/" + imageName))
