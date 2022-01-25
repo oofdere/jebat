@@ -1,0 +1,10 @@
+<label>
+    <input type="checkbox" name="can_view" {{ "checked" if user.can_view }}> View
+</label>
+<input type="hidden" name="user_id" value="{{ user.id }}">
+<label>
+    <input type="checkbox" name="can_upload" {{ "checked" if user.can_upload }} label="Upload"> Upload
+</label>
+<label>
+    <input type="checkbox" name="is_admin" {{ "checked" if user.is_admin }} label="Admin"> Admin
+</label>

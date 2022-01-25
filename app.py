@@ -6,9 +6,10 @@ from sqlalchemy import desc
 
 import thumbnail
 
-from helpers import env
+from helpers import env, is_checked
 
-from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash, send_file
+from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash, send_file, abort
+
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
 
@@ -177,3 +178,23 @@ def admin():
     if user.is_admin:
         return "admin"
     return "not admin"
+
+
+@app.route("/roles", methods=["GET", "POST"])
+@login_required
+def roles():
+    user = User.query.filter_by(id=current_user.id).first()
+    if user.is_admin:
+        if request.method == "POST":
+            user_id = request.form['user_id']
+            user = User.query.filter_by(id=user_id).first()
+            user.is_admin = is_checked(request, "is_admin")
+            user.can_upload = is_checked(request, "can_upload")
+            user.can_view = is_checked(request, "can_view")
+            db.session.add(user)
+            db.session.commit()
+            return render_template("roles_partial.html", user=user)
+        else:
+            all_users = User.query.all()
+            return render_template("roles.html", all_users=all_users)
+    return abort(403)
