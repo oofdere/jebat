@@ -115,8 +115,8 @@ def create_album():
 @login_required
 def album(album_id):
     get_album = Album.query.filter_by(id=album_id).first()
-    al_images = get_album.images_in_album
-    return render_template("album.html", album=get_album, al_images=al_images)
+    album_images = get_album.images_in_album
+    return render_template("album.html", album=get_album, album_images=album_images)
 
 
 @app.route("/album/add/<int:img_id>", methods=["POST"])
