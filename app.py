@@ -21,6 +21,10 @@ login.login_view = "login"
 from models import *
 
 db.init_app(app)
+
+from flask_migrate import Migrate
+migrate = Migrate(app, db)
+
 from forms import *
 import hashlib
 
