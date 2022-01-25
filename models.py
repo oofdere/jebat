@@ -29,6 +29,9 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
+    is_admin = db.Column(db.Boolean)
+    can_upload = db.Column(db.Boolean)
+    can_view = db.Column(db.Boolean)
     uploads = db.relationship("Image", backref="images", lazy=True)
 
     def set_password(self, password):
