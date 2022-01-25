@@ -28,7 +28,6 @@ migrate = Migrate(app, db)
 from forms import *
 import hashlib
 
-
 @app.route("/")
 @login_required
 def home():
@@ -56,7 +55,12 @@ def signup():
         return redirect(url_for("home"))
     form = SignupForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data)
+        user = User(
+            username=form.username.data,
+            is_admin=bool(env("IS_ADMIN")),
+            can_view=bool(env("CAN_VIEW")),
+            can_upload=bool(env("CAN_UPLOAD"))
+        )
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -104,7 +108,6 @@ def pool(pool_id):
     # show a collection of images
     pass
 
-
 @app.route("/search")
 def search():
     # search images by tags
@@ -112,3 +115,11 @@ def search():
 
 blueprint = Blueprint('images', __name__, static_url_path='/images', static_folder='images/')
 app.register_blueprint(blueprint)
+
+@app.route("/admin")
+@login_required
+def admin():
+    user = User.query.filter_by(id=current_user.id).first()
+    if user.is_admin:
+        return "admin"
+    return "not admin"
