@@ -13,9 +13,10 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 # static_url_path sets the path static files are served from
 # by default it's /static
-app.config["SQLALCHEMY_DATABASE_URI"] = env("SQLALCHEMY_DATABASE_URI")
-app.config["SECRET_KEY"] = env("SECRET_KEY")
-
+# app.config["SQLALCHEMY_DATABASE_URI"] = env("SQLALCHEMY_DATABASE_URI")
+# app.config["SECRET_KEY"] = env("SECRET_KEY")
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.db"
+app.config["SECRET_KEY"] = "fortnite"
 login = LoginManager(app)
 login.login_view = "login"
 from models import *
@@ -89,10 +90,53 @@ def upload():
         return render_template("upload.html", form=form)
 
 
+@app.route("/albums")
+def albums():
+    all_albums = Album.query.all()
+    print(all_albums)
+    return render_template("albums.html", albums=all_albums)
+
+
+@app.route("/create_album", methods=["GET", "POST"])
+@login_required
+def create_album():
+    form = AlbumForm()
+    if request.method == "POST":
+        print("post request to create album")
+        name_of_album = form.name.data
+        description_of_album = form.description.data
+        new_album = Album(name=name_of_album, description=description_of_album,
+                          user_id=current_user.id)
+        db.session.add(new_album)
+        db.session.commit()
+        return redirect(url_for('album', album_id=new_album.id))
+    return render_template("create_album.html", form=form)
+
+
+@app.route("/album/<int:album_id>", methods=["GET", "POST"])
+@login_required
+def album(album_id):
+    get_album = Album.query.filter_by(id=album_id).first()
+    al_images = get_album.images_in_album
+    return render_template("album.html", album=get_album, al_images=al_images)
+
+
+@app.route("/album/add/<int:img_id>", methods=["POST"])
+@login_required
+def add_to_album(img_id):
+    album_id = request.form['choose_album']
+    album_list = Album.query.filter_by(id=album_id).first()
+    get_image = Image.query.filter_by(id=img_id).first()
+    album_list.images_in_album.append(get_image)
+    db.session.commit()
+    return redirect(url_for('album', album_id=album_id))
+
+
 @app.route("/<image_hash>")
 def view(image_hash):
     image = Image.query.filter_by(hash=image_hash).first()
-    return render_template("detail_view.html", image=image)
+    all_albums = Album.query.all()
+    return render_template("detail_view.html", image=image, albums=all_albums)
 
 
 @app.route("/pool/<int:pool_id>")
@@ -105,6 +149,7 @@ def pool(pool_id):
 def search():
     # search images by tags
     pass
+
 
 blueprint = Blueprint('images', __name__, static_url_path='/images', static_folder='images/')
 app.register_blueprint(blueprint)

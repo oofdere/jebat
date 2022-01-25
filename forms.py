@@ -4,11 +4,13 @@ from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, EqualTo
 from models import User
 
+
 class LoginForm(FlaskForm):
     username = StringField("username", validators=[DataRequired()])
     password = PasswordField("password", validators=[DataRequired()])
     remember = BooleanField("remember me")
     submit = SubmitField("login")
+
 
 class SignupForm(FlaskForm):
     username = StringField("username", validators=[DataRequired()])
@@ -21,7 +23,14 @@ class SignupForm(FlaskForm):
         if user is not None:
             raise ValidationError("Username already in use.")
 
+
 class UploadForm(FlaskForm):
     file = FileField("file", validators=[DataRequired()])
     caption = StringField("caption", validators=[DataRequired()])
     submit = SubmitField("submit")
+
+
+class AlbumForm(FlaskForm):
+    name = StringField("Name of album", validators=[DataRequired()])
+    description = StringField("Description")  # description should be optional
+    create = SubmitField("create")

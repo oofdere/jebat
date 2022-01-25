@@ -1,0 +1,15 @@
+{% extends "default.html" %}
+
+{% block content %}
+    <a href="/create_album">Add Album</a>
+    {% if not albums %}
+        <h4>No albums exist yet. Create one <a href="/create_album">here</a>.</h4>
+    {% else %}
+        <h1>Albums: </h1>
+        {% for album in albums %}
+            {{ album.id }}: <a href="/album/{{ album.id }}">{{ album.name }}</a> -
+            {{ album.description }}
+            <hr>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
