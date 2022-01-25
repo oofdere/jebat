@@ -30,6 +30,8 @@ migrate = Migrate(app, db)
 from forms import *
 import hashlib
 
+from decorators import *
+
 @app.route("/")
 @login_required
 def home():
@@ -78,7 +80,7 @@ def logout():
 
 
 @app.route("/upload", methods=["GET", "POST"])
-@login_required
+@can_upload
 def upload():
     form = UploadForm()
     if request.method == "POST":
@@ -101,6 +103,7 @@ def upload():
 
 
 @app.route("/albums")
+@can_view
 def albums():
     all_albums = Album.query.all()
     print(all_albums)
@@ -108,7 +111,7 @@ def albums():
 
 
 @app.route("/create_album", methods=["GET", "POST"])
-@login_required
+@can_view
 def create_album():
     form = AlbumForm()
     if request.method == "POST":
@@ -124,7 +127,7 @@ def create_album():
 
 
 @app.route("/album/<int:album_id>", methods=["GET", "POST"])
-@login_required
+@can_view
 def album(album_id):
     get_album = Album.query.filter_by(id=album_id).first()
     album_images = get_album.images_in_album
@@ -132,7 +135,7 @@ def album(album_id):
 
 
 @app.route("/album/add/<int:img_id>", methods=["POST"])
-@login_required
+@can_view
 def add_to_album(img_id):
     album_id = request.form['choose_album']
     album_list = Album.query.filter_by(id=album_id).first()
@@ -143,6 +146,7 @@ def add_to_album(img_id):
 
 
 @app.route("/<image_hash>")
+@can_view
 def view(image_hash):
     image = Image.query.filter_by(hash=image_hash).first()
     all_albums = Album.query.all()
@@ -150,6 +154,7 @@ def view(image_hash):
 
 
 @app.route("/pool/<int:pool_id>")
+@can_view
 def pool(pool_id):
     # show a collection of images
     pass
@@ -172,7 +177,7 @@ app.register_blueprint(blueprint)
 
 
 @app.route("/admin")
-@login_required
+@is_admin
 def admin():
     user = User.query.filter_by(id=current_user.id).first()
     if user.is_admin:
@@ -181,10 +186,8 @@ def admin():
 
 
 @app.route("/roles", methods=["GET", "POST"])
-@login_required
+@is_admin
 def roles():
-    user = User.query.filter_by(id=current_user.id).first()
-    if user.is_admin:
         if request.method == "POST":
             user_id = request.form['user_id']
             user = User.query.filter_by(id=user_id).first()
@@ -197,4 +200,3 @@ def roles():
         else:
             all_users = User.query.all()
             return render_template("roles.html", all_users=all_users)
-    return abort(403)
