@@ -5,3 +5,4 @@ Flask-WTF
 flask-login
 python-dotenv
 typer # for cli
+Pillow
