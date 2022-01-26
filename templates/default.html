@@ -20,9 +20,16 @@
         </ul> 
         <ul>
             <li><a href="/">Home</a></li>
-            {% if current_user.is_authenticated %}
+            {% if current_user.can_upload %}
                 <li><a href="/upload">Upload</a></li>
+            {% endif %}
+            {% if current_user.can_view %}
                 <li><a href="/albums">Albums</a></li>
+            {% endif %}
+            {% if current_user.is_admin %}
+                <li><a href="/roles">Roles</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
                 <li><a href="/logout">Log out</a></li>
             {% else %}
                 <li><a href="/signup">Sign up</a></li>
@@ -34,6 +41,5 @@
         {% block content %}
         {% endblock %}
     </main>
-
 </body>
 </html>
