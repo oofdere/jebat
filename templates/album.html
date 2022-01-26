@@ -2,11 +2,5 @@
 
 {% block content %}
     <h1>Album: {{ album.name }}</h1>
-    {% for image in album_images %}
-        <div class="gallery-item">
-            <a href="{{ url_for('view', image_hash=image.hash) }}" data-tooltip="{{ image.caption }}">
-                <img src="../images/{{ image.hash }}.{{ image.extension }}" alt="{{ image.caption }}" />
-            </a>
-        </div>
-    {% endfor %}
+    {% include "gallery_partial.html" %}
 {% endblock %}

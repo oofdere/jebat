@@ -1,13 +1,5 @@
 {% extends "default.html" %}
 
 {% block content %}
-<div class="gallery">
-        {% for image in images %}
-        <div class="gallery-item">
-            <a href="{{ url_for('view', image_hash=image.hash) }}" data-tooltip="{{ image.caption }}">
-                <img src="thumbnails/{{ image.hash }}.{{ image.extension }}" alt="{{ image.caption }}" />
-            </a>
-        </div>
-        {% endfor %}
-    </div>
+    {% include "gallery_partial.html" %}
 {% endblock %}

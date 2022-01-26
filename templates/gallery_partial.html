@@ -1,0 +1,10 @@
+<div class="gallery">
+    {% for image in images %}
+    <div class="gallery-item">
+        <a href="{{ url_for('view', image_hash=image.hash) }}" data-tooltip="{{ image.caption }}">
+            <img src="{{ url_for('get_thumb', image_hash=image.hash, filename=image.hash+'.'+image.extension) }}"
+            <img src="thumbnails/" alt="{{ image.caption }}" />
+        </a>
+    </div>
+    {% endfor %}
+</div>

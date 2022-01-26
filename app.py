@@ -122,16 +122,16 @@ def create_album():
                           user_id=current_user.id)
         db.session.add(new_album)
         db.session.commit()
-        return redirect(url_for('album', album_id=new_album.id))
+        return redirect(url_for('view_album', album_id=new_album.id))
     return render_template("create_album.html", form=form)
 
 
 @app.route("/album/<int:album_id>", methods=["GET", "POST"])
 @can_view
-def album(album_id):
-    get_album = Album.query.filter_by(id=album_id).first()
-    album_images = get_album.images_in_album
-    return render_template("album.html", album=get_album, album_images=album_images)
+def view_album(album_id):
+    album = Album.query.filter_by(id=album_id).first()
+    images = album.images_in_album
+    return render_template("album.html", album=album, images=images)
 
 
 @app.route("/album/add/<int:img_id>", methods=["POST"])
@@ -143,7 +143,7 @@ def add_to_album(img_id):
     album.images_in_album.append(image)
     db.session.commit()
     all_albums = Album.query.all()
-    album_link = url_for('album', album_id=album.id)
+    album_link = url_for('view_album', album_id=album.id)
     flash(Markup(f'Added to <a href="{album_link}">{album.name}</a>'))
     return render_template("album_add_partial.html", albums=all_albums, image=image)
 
