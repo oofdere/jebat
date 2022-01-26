@@ -19,10 +19,6 @@ def create(imageName: str):
         new_height = 500
         new_width = 500
 
-    
-    print(img.size)
     img = img.resize((new_width, new_height))
-    print(new_height, new_width)
     img.convert("RGB")
-    print(img.size)
     img.save(os.path.join(thumb_dir + "/" + imageName))
