@@ -25,6 +25,7 @@ class Image(db.Model):
     in_album = db.relationship("Album", secondary=image_to_album, backref='images_in_album')
 
 
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
@@ -47,6 +48,12 @@ class Album(db.Model):
     name = db.Column(db.Text)
     description = db.Column(db.Text)
 
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.Text)
+    image_id = db.Column(db.Integer, db.ForeignKey('image.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
 
 @login.user_loader
 def load_user(id):

@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+import re
 
 import flask_login
 from sqlalchemy import desc
@@ -203,3 +204,15 @@ def roles():
         else:
             all_users = User.query.all()
             return render_template("roles.html", all_users=all_users)
+
+@app.route("/add_comment", methods=["POST"])
+def add_comment():
+    user_id = request.form['user_id']
+    user = User.query.filter_by(id=user_id).first()
+    image_id = request.form['image_id']
+    image = Image.query.filter_by(id=image_id).first()
+    text = request.form['comment']
+    comment = Comment(comment=text,image_id=image_id, user_id=user_id, date=datetime.now())
+    db.session.add(comment)
+    db.session.commit()
+    return render_template("comment_partial.html", comment=comment, user=user, image=image)

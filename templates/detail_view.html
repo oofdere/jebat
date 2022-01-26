@@ -9,5 +9,13 @@
     </aside>
     <div role="document">
         <img src="images/{{ image.hash }}.{{ image.extension }}" alt="view_image">
+        <div>
+            <form hx-post="/add_comment"> 
+                <input type="hidden" name="user_id" value="{{ current_user.id }}">
+                <input type="hidden" name="image_id" value="{{ image.id }}">
+                <textarea name="comment"></textarea>
+                <button type="submit">Add Comment</button>
+            </form>
+        </div>    
     </div>
 {% endblock %}

@@ -1,0 +1,7 @@
+{{comment}}
+<form hx-post="/add_comment"> 
+    <input type="hidden" name="user_id" value="{{ user.id }}">
+    <input type="hidden" name="image_id" value="{{ image.id }}">
+    <textarea name="comment"></textarea>
+    <button type="submit">Add Comment</button>
+</form>
