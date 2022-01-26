@@ -7,17 +7,22 @@ thumb_dir = env("THUMB_DIR")
 
 def create(imageName: str):
     img = Image.open(img_dir + "/" + imageName)
-    
-    if (img.size[0] > img.size[1]):
+    width = img.size[0]
+    height = img.size[1]
+    if (width > height):
         new_width = 500
-        new_height = round(500/img.size[0] * img.size[1]); #new width/old width= scale factor. scale factor * old height = new height
+        new_height = round(500/width * height);
     elif (img.size[1] > img.size[0]):
         new_height = 500
-        new_width = round(500/img.size[1] * img.size[0]);
+        new_width = round(500/height * width);
     else:
         new_height = 500
         new_width = 500
 
-    img.thumbnail((new_height, new_width))
+    
+    print(img.size)
+    img = img.resize((new_width, new_height))
+    print(new_height, new_width)
     img.convert("RGB")
+    print(img.size)
     img.save(os.path.join(thumb_dir + "/" + imageName))
