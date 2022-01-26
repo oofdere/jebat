@@ -8,7 +8,7 @@ import thumbnail
 
 from helpers import env, is_checked
 
-from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash, send_file, abort
+from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash, send_file, abort, Markup
 
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
@@ -138,11 +138,14 @@ def album(album_id):
 @can_view
 def add_to_album(img_id):
     album_id = request.form['choose_album']
-    album_list = Album.query.filter_by(id=album_id).first()
-    get_image = Image.query.filter_by(id=img_id).first()
-    album_list.images_in_album.append(get_image)
+    album = Album.query.filter_by(id=album_id).first()
+    image = Image.query.filter_by(id=img_id).first()
+    album.images_in_album.append(image)
     db.session.commit()
-    return redirect(url_for('album', album_id=album_id))
+    all_albums = Album.query.all()
+    album_link = url_for('album', album_id=album.id)
+    flash(Markup(f'Added to <a href="{album_link}">{album.name}</a>'))
+    return render_template("album_add_partial.html", albums=all_albums, image=image)
 
 
 @app.route("/<image_hash>")
