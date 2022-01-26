@@ -7,8 +7,8 @@
     {% else %}
         <h1>Albums: </h1>
         {% for album in albums %}
-            {{ album.id }}: <a href="/album/{{ album.id }}">{{ album.name }}</a> -
-            {{ album.description }}
+            {{ album.id }}: <a href="/album/{{ album.id }}">{{ album.name }}</a>{% if album.description%} -
+            {{ album.description }}{% endif %}
             <hr>
         {% endfor %}
     {% endif %}
