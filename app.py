@@ -79,29 +79,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/upload", methods=["GET", "POST"])
-@can_upload
-def upload():
-    form = UploadForm()
-    if request.method == "POST":
-        if form.validate_on_submit():
-            f = form.file.data
-            filename = secure_filename(f.filename)
-            extension = filename.split('.')[1]
-            image_hash = hashlib.md5(f.read()).hexdigest()
-            filename = image_hash + "." + extension
-            image = Image(hash=image_hash, extension=extension, caption=form.caption.data,
-                          date=datetime.now(), user_id=current_user.id)
-            db.session.add(image)
-            db.session.commit()
-            f.seek(0)
-            f.save(os.path.join(app.root_path, env("IMAGE_DIR"), filename))
-            thumbnail.create(filename)
-            return redirect(url_for('view', image_hash=image_hash))
-    else:
-        return render_template("upload.html", form=form)
-
-
 @app.route("/albums")
 @can_view
 def albums():
@@ -178,5 +155,6 @@ def search():
 blueprint = Blueprint('images', __name__, static_url_path='/images', static_folder='images/')
 app.register_blueprint(blueprint)
 
-import admin
+import admin, upload
 app.register_blueprint(admin.blueprint, url_prefix='/admin')
+app.register_blueprint(upload.blueprint, url_prefix='/upload')
