@@ -1,4 +1,4 @@
-# jebat
+# ![jebat](https://user-images.githubusercontent.com/43102807/151299535-6e118e80-6142-4b2e-b63f-d4bb268b24e4.png)
 
 ## Development setup
 1. Install `python3` and `pip3`
