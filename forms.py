@@ -26,7 +26,7 @@ class SignupForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     file = FileField("file", validators=[DataRequired()])
-    caption = StringField("caption", validators=[DataRequired()])
+    caption = StringField("caption")
     submit = SubmitField("submit")
 
 
