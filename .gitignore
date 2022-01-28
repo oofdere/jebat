@@ -134,6 +134,8 @@ dmypy.json
 photos/
 images/
 thumbnails/
+cogdb/
+graph/
 
 # Intellj
 .idea/

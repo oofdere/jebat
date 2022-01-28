@@ -6,3 +6,4 @@ flask-login
 python-dotenv
 typer # for cli
 Pillow
+cogdb
