@@ -1,7 +1,7 @@
 {% extends "default.html" %}
 
 {% block content %}
-<form action="/login" method="post" novalidate>
+<form action="{{ url_for('login.login') }}" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p>
         {{ form.username.label }}

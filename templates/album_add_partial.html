@@ -1,4 +1,4 @@
-<form hx-post="/album/add/{{ image.id }}">
+<form hx-post="{{ url_for('album.add', img_id=image.id) }}">
     <label for="album_chooser">Add to album:</label>
     <input list="albums" id="album_chooser" name="choose_album" />
     <datalist id="albums">
