@@ -1,6 +1,8 @@
-from PIL import Image
-from helpers import env
 import os
+
+from PIL import Image
+
+from helpers import env
 
 img_dir = env("IMAGE_DIR")
 thumb_dir = env("THUMB_DIR")

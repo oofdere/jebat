@@ -3,11 +3,14 @@
 
 # cli
 import typer
+
 cli = typer.Typer()
 
 # allows for accessing .env variables
 import os
+
 from dotenv import load_dotenv
+
 load_dotenv()
 def env(key):
     return os.getenv(key)

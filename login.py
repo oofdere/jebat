@@ -1,17 +1,11 @@
-from helpers import env
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_user, logout_user
 
-from flask import Blueprint, flash, render_template, redirect, url_for, flash
-
-from flask_login import login_user, current_user, logout_user
-
-
-from flask import Blueprint, render_template, request
-from flask_login import current_user
-from models import User
-from decorators import is_admin
-from helpers import is_checked
 from app import db
+from decorators import is_admin
 from forms import LoginForm, SignupForm
+from helpers import env, is_checked
+from models import User
 
 blueprint = Blueprint('login', __name__, template_folder='templates/login')
 

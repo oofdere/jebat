@@ -1,17 +1,17 @@
-from flask import Blueprint, request, render_template, redirect, url_for
+import hashlib
+import os
+from datetime import datetime
+
+from flask import Blueprint, redirect, render_template, request, url_for
 from flask_login import current_user
 from werkzeug.utils import secure_filename
 
-from datetime import datetime
-import hashlib
-import os
-
+import thumbnail
 from app import db
-from helpers import env
-from models import Image
 from decorators import can_upload
 from forms import UploadForm
-import thumbnail
+from helpers import env
+from models import Image
 
 blueprint = Blueprint("upload", __name__, template_folder="templates/upload")
 

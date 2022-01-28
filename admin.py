@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, request
 from flask_login import current_user
-from models import User
+
+from app import db
 from decorators import is_admin
 from helpers import is_checked
-from app import db
+from models import User
 
 blueprint = Blueprint('admin', __name__, template_folder='templates/admin')
 
