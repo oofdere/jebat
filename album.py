@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, Markup
+from flask import (Blueprint, Markup, flash, redirect, render_template,
+                   request, url_for)
 from flask_login import current_user
 
+from app import db
 from decorators import can_view
 from forms import AlbumForm
 from models import Album, Image
-from app import db
 
 blueprint = Blueprint('album', __name__, template_folder='templates/album')
 

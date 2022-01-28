@@ -21,9 +21,11 @@ from models import *
 db.init_app(app)
 migrate = Migrate(app, db)
 
+import admin
+import album
+import login
+import upload
 from decorators import *
-
-import admin, album, login, upload
 
 app.register_blueprint(admin.blueprint, url_prefix='/admin')
 app.register_blueprint(upload.blueprint, url_prefix='/upload')

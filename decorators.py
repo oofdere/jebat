@@ -1,7 +1,10 @@
 from functools import wraps
-from flask import g, url_for, redirect, request, abort
-from models import User
+
+from flask import abort, g, redirect, request, url_for
 from flask_login import current_user
+
+from models import User
+
 
 # decorators to apply scopes to routes
 def can_view(f):
