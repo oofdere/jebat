@@ -22,19 +22,19 @@
         <ul>
             <li><a href="/">Home</a></li>
             {% if current_user.can_upload %}
-                <li><a href="/upload">Upload</a></li>
+                <li><a href="{{ url_for('upload.upload') }}">Upload</a></li>
             {% endif %}
             {% if current_user.can_view %}
-                <li><a href="/album">Albums</a></li>
+                <li><a href="{{ url_for('album.albums') }}">Albums</a></li>
             {% endif %}
             {% if current_user.is_admin %}
-                <li><a href="/roles">Roles</a></li>
+                <li><a href="{{ url_for('admin.roles') }}">Roles</a></li>
             {% endif %}
             {% if current_user.is_authenticated %}
-                <li><a href="/logout">Log out</a></li>
+                <li><a href="{{ url_for('login.logout') }}">Log out</a></li>
             {% else %}
-                <li><a href="/signup">Sign up</a></li>
-                <li><a href="/login">Log in</a></li>
+                <li><a href="{{ url_for('login.signup') }}">Sign up</a></li>
+                <li><a href="{{ url_for('login.logout') }}">Log in</a></li>
             {% endif %}
         </ul>
     </nav>

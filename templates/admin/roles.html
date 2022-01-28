@@ -10,10 +10,9 @@
             <tr>
                 <td>{{user.username}}</td>
                 <td>
-                    <form hx-post="/roles" hx-trigger="change">
+                    <form hx-post="{{ url_for('admin.roles') }}" hx-trigger="change">
                         {% include "roles_partial.html" %}
                     </form>
-                    
                 </td>
             </tr>
         {% endfor %}

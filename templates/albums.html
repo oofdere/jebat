@@ -1,9 +1,9 @@
 {% extends "default.html" %}
 
 {% block content %}
-    <a href="{{ url_for("album.new") }}">Add Album</a>
+    <a href="{{ url_for('album.new') }}">Add Album</a>
     {% if not albums %}
-        <h4>No albums exist yet. Create one <a href="{{ url_for("album.new") }}">here</a>.</h4>
+        <h4>No albums exist yet. Create one <a href="{{ url_for('album.new') }}">here</a>.</h4>
     {% else %}
         <h1>Albums: </h1>
         {% for album in albums %}

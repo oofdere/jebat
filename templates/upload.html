@@ -1,7 +1,7 @@
 {% extends "default.html" %}
 
 {% block content %}
-<form action="/upload" method="post" enctype="multipart/form-data">
+<form action="{{ url_for('upload.upload') }}" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <p>
         {{ form.file.label }}
