@@ -8,7 +8,8 @@ import thumbnail
 
 from helpers import env, is_checked
 
-from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash, send_file, abort, Markup
+from flask import Blueprint, Flask, flash, render_template, redirect, request, send_from_directory, url_for, flash, \
+    send_file, abort, Markup
 
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from werkzeug.utils import secure_filename
@@ -25,12 +26,14 @@ from models import *
 db.init_app(app)
 
 from flask_migrate import Migrate
+
 migrate = Migrate(app, db)
 
 from forms import *
 import hashlib
 
 from decorators import *
+
 
 @app.route("/")
 @login_required
@@ -79,56 +82,11 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/albums")
-@can_view
-def albums():
-    all_albums = Album.query.all()
-    print(all_albums)
-    return render_template("albums.html", albums=all_albums)
-
-
-@app.route("/create_album", methods=["GET", "POST"])
-@can_view
-def create_album():
-    form = AlbumForm()
-    if request.method == "POST":
-        print("post request to create album")
-        name_of_album = form.name.data
-        description_of_album = form.description.data
-        new_album = Album(name=name_of_album, description=description_of_album,
-                          user_id=current_user.id)
-        db.session.add(new_album)
-        db.session.commit()
-        return redirect(url_for('view_album', album_id=new_album.id))
-    return render_template("create_album.html", form=form)
-
-
-@app.route("/album/<int:album_id>", methods=["GET", "POST"])
-@can_view
-def view_album(album_id):
-    album = Album.query.filter_by(id=album_id).first()
-    images = album.images_in_album
-    return render_template("album.html", album=album, images=images)
-
-
-@app.route("/album/add/<int:img_id>", methods=["POST"])
-@can_view
-def add_to_album(img_id):
-    album_id = request.form['choose_album']
-    album = Album.query.filter_by(id=album_id).first()
-    image = Image.query.filter_by(id=img_id).first()
-    album.images_in_album.append(image)
-    db.session.commit()
-    all_albums = Album.query.all()
-    album_link = url_for('view_album', album_id=album.id)
-    flash(Markup(f'Added to <a href="{album_link}">{album.name}</a>'))
-    return render_template("album_add_partial.html", albums=all_albums, image=image)
-
-
 @app.route("/<image_hash>")
 @can_view
 def view(image_hash):
     image = Image.query.filter_by(hash=image_hash).first()
+    print(image)
     all_albums = Album.query.all()
     return render_template("detail_view.html", image=image, albums=all_albums)
 
@@ -139,22 +97,24 @@ def pool(pool_id):
     # show a collection of images
     pass
 
-  
+
 @app.route("/thumbnails/<filename>")
 def get_thumb(filename):
     filepath = os.path.join(app.root_path, env("THUMB_DIR"), secure_filename(filename))
     return send_file(filepath, mimetype='image/jpeg')
 
-  
+
 @app.route("/search")
 def search():
     # search images by tags
     pass
 
-  
+
 blueprint = Blueprint('images', __name__, static_url_path='/images', static_folder='images/')
 app.register_blueprint(blueprint)
 
-import admin, upload
+import admin, upload, album
+
 app.register_blueprint(admin.blueprint, url_prefix='/admin')
 app.register_blueprint(upload.blueprint, url_prefix='/upload')
+app.register_blueprint(album.blueprint, url_prefix='/album')

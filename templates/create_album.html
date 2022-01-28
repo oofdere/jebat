@@ -1,7 +1,7 @@
 {% extends "default.html" %}
 
 {% block content %}
-    <form action="/create_album" method="post" enctype="multipart/form-data">
+    <form action="{{ url_for("album.new") }}" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <p>
         {{ form.name.label }}
