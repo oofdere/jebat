@@ -1,14 +1,14 @@
 {% extends "default.html" %}
 
 {% block content %}
-    <a href="/create_album">Add Album</a>
+    <a href="{{ url_for("album.new") }}">Add Album</a>
     {% if not albums %}
-        <h4>No albums exist yet. Create one <a href="/create_album">here</a>.</h4>
+        <h4>No albums exist yet. Create one <a href="{{ url_for("album.new") }}">here</a>.</h4>
     {% else %}
         <h1>Albums: </h1>
         {% for album in albums %}
             {{ album.id }}: <a href="/album/{{ album.id }}">{{ album.name }}</a>{% if album.description%} -
-            {{ album.description }}{% endif %}
+            {{ album.description }}{% endif %} <b>{{ album.images_in_album|length }} photos</b>
             <hr>
         {% endfor %}
     {% endif %}

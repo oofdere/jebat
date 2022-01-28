@@ -21,4 +21,6 @@ def create(imageName: str):
 
     img = img.resize((new_width, new_height))
     img.convert("RGB")
+    print(thumb_dir)
+    print(imageName)
     img.save(os.path.join(thumb_dir + "/" + imageName))
