@@ -9,10 +9,10 @@ from cog.torque import Graph
 
 g = Graph("tags", env("GRAPH_DIR"))
 
-@blueprint.route("<tag>/add/<image_id>")
-def add(image_id: str, tag: str):
+@blueprint.route("<tag>/add/<image_hash>")
+def add(image_hash: str, tag: str):
     # add a tag to an image
-    return g.put(str(image_id), "tag", tag)
+    return g.put(str(image_hash), "tag", tag)
 
 def images_by_tag(tag: str):
     # takes in a tag,
@@ -24,10 +24,10 @@ def images_by_tag(tag: str):
         out.append(image)
     return out
 
-def tags_by_image(image_id: str):
+def tags_by_image(image_hash: str):
     # takes in an image,
     # returns a list of tags
-    query = g.v(image_id).out("tag").all()
+    query = g.v(image_hash).out("tag").all()
     out = []
     for result in query["result"]:
         out.append(result["id"])
