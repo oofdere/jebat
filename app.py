@@ -1,9 +1,11 @@
 import os
+from urllib import response
 
 from flask import Blueprint, Flask, render_template, send_file
 from flask_login import LoginManager, login_required
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import HTTPException
 
 from helpers import env
 
@@ -25,11 +27,13 @@ import admin
 import album
 import login
 import upload
+import image
 from decorators import *
 
 app.register_blueprint(admin.blueprint, url_prefix='/admin')
 app.register_blueprint(upload.blueprint, url_prefix='/upload')
 app.register_blueprint(album.blueprint, url_prefix='/album')
+app.register_blueprint(image.blueprint, url_prefix='/image')
 app.register_blueprint(login.blueprint, url_prefix='/')
 
 
@@ -38,15 +42,6 @@ app.register_blueprint(login.blueprint, url_prefix='/')
 def home():
     images = Image.query.order_by(desc(Image.date)).all()
     return render_template("recent.html", images=images)
-
-
-@app.route("/<image_hash>")
-@can_view
-def view(image_hash):
-    image = Image.query.filter_by(hash=image_hash).first()
-    print(image)
-    all_albums = Album.query.all()
-    return render_template("detail_view.html", image=image, albums=all_albums)
 
 
 @app.route("/pool/<int:pool_id>")
@@ -66,3 +61,7 @@ blueprint = Blueprint('images', __name__, static_url_path='/images', static_fold
 app.register_blueprint(blueprint)
 
 
+@app.errorhandler(HTTPException)
+def handle_exception(error):
+    response = error.get_response()
+    return render_template("error.html", error=error, response=response), error.code
