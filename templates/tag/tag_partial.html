@@ -1,0 +1,8 @@
+<span>
+    <a href="{{url_for('tag.view', tag_name=tag.name)}}">
+        {{- tag.name -}}
+    </a>
+    <span class="secondary">
+        {{ tag.images | length -}}
+    </span>
+</span>
