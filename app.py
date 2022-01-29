@@ -25,13 +25,11 @@ import admin
 import album
 import login
 import upload
-import tag
 from decorators import *
 
 app.register_blueprint(admin.blueprint, url_prefix='/admin')
 app.register_blueprint(upload.blueprint, url_prefix='/upload')
 app.register_blueprint(album.blueprint, url_prefix='/album')
-app.register_blueprint(tag.blueprint, url_prefix='/tag')
 app.register_blueprint(login.blueprint, url_prefix='/')
 
 
