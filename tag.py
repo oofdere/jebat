@@ -1,4 +1,3 @@
-from termios import PARODD
 from flask import Blueprint, render_template, request
 
 from models import Tag, Image
