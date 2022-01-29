@@ -1,5 +1,5 @@
 from termios import PARODD
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 from models import Tag, Image
 
@@ -19,32 +19,39 @@ def get(tag_name):
     return tag
 
 @blueprint.route("")
-def all():
+def tags():
     all_tags = Tag.query.all()
     return render_template("all_tags.html", tags=all_tags)
 
 @blueprint.route("/<tag_name>")
 def view(tag_name):
-    pass
+    images = get_images(tag_name)
+    return render_template("recent.html", images=images)
 
-@blueprint.route("/<tag_name>/add/<image_id>")
-def add(tag_name, image_id):
+@blueprint.route("/add", methods=["POST"])
+def add():
     # add a tag to an image
+    tag_name = request.form['tag']
     tag = get(tag_name)
+    image_id = request.form['image_id']
     image = Image.query.filter_by(id=image_id).first()
     image.tags.append(tag)
     db.session.commit()
-    return render_template("tag_added.html", tag=tag)
+    return render_template("tag_list.html", tags=get_tags(image_id))
 
 @blueprint.route("<tag>/remove/<image_id>")
 def remove(tag):
     # remove a tag from an image
     pass
 
-def tags(image_id):
+@blueprint.route("image/<image_id>")
+def get_tags(image_id):
     # return the tags on a given image
-    pass
+    image = Image.query.filter_by(id=image_id).first()
+    return image.tags
 
-def images(tag_id):
+
+def get_images(tag_name):
     # return the images for a given tag
-    pass
+    tag = Tag.query.filter_by(name=tag_name).first()
+    return tag.images

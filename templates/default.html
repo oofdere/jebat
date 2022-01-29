@@ -25,6 +25,9 @@
                 <li><a href="{{ url_for('upload.upload') }}">Upload</a></li>
             {% endif %}
             {% if current_user.can_view %}
+                <li><a href="{{ url_for('tag.tags') }}">Tags</a></li>
+            {% endif %}
+            {% if current_user.can_view %}
                 <li><a href="{{ url_for('album.albums') }}">Albums</a></li>
             {% endif %}
             {% if current_user.is_admin %}

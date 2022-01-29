@@ -6,6 +6,8 @@
             <p>{{ image.caption }}</p>
             {% include "album_add_partial.html" %}
         </nav>
+        {% include "tag/tag_add.html" %}
+        {% include "tag/tag_list.html" %}
     </aside>
     <div role="document">
         <img src="/images/{{ image.hash }}.{{ image.extension }}" alt="view_image">
