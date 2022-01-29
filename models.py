@@ -56,6 +56,8 @@ class Album(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
+    namespace = db.Column(db.Text)
+    color = db.Column(db.Text)
 
 
 @login_manager.user_loader
