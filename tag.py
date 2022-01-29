@@ -17,6 +17,11 @@ def get(tag_name):
         db.session.commit()
     return tag
 
+def clear(tag):
+    if not tag.images:
+        db.session.delete(tag)
+        db.session.commit()
+
 @blueprint.route("")
 def tags():
     all_tags = Tag.query.all()
@@ -36,12 +41,16 @@ def add():
     image = Image.query.filter_by(id=image_id).first()
     image.tags.append(tag)
     db.session.commit()
-    return render_template("tag_list.html", tags=get_tags(image_id))
+    return render_template("tag_list.html", tags=get_tags(image_id), image=image)
 
-@blueprint.route("<tag>/remove/<image_id>")
-def remove(tag):
-    # remove a tag from an image
-    pass
+@blueprint.route("<tag_name>/remove/<image_id>")
+def remove(tag_name, image_id):
+    image = Image.query.filter_by(id=image_id).first()
+    tag = Tag.query.filter_by(name=tag_name).first()
+    image.tags.remove(tag)
+    db.session.commit()
+    clear(tag)
+    return render_template("tag_list.html", tags=get_tags(image_id), image=image)
 
 @blueprint.route("image/<image_id>")
 def get_tags(image_id):

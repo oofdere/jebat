@@ -1,4 +1,7 @@
 <span>
+    {% if image %}
+    <a hx-get="{{url_for('tag.remove', tag_name=tag.name, image_id=image.id)}}" hx-target="#tag_list" class="red">🆁</a> 
+    {% endif %}
     <a href="{{url_for('tag.view', tag_name=tag.name)}}">
         {{- tag.name -}}
     </a>
