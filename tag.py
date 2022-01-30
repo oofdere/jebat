@@ -51,7 +51,7 @@ def clear(tag):
 
 @blueprint.route("")
 def tags():
-    all_tags = Tag.query.order_by(Tag.namespace).all()
+    all_tags = Tag.query.order_by(Tag.namespace, Tag.name).all()
     print(all_tags)
     return render_template("all_tags.html", tags=all_tags)
 

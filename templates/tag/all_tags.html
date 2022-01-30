@@ -2,7 +2,7 @@
 
 {% block content %}
     <ol>
-        {% for tag in tags | sort(attribute='name') %}
+        {% for tag in tags %}
             <li>{% include "tag_partial.html" %}</li>
         {% endfor %}
     </ol>
