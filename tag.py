@@ -44,6 +44,10 @@ def color_from_tag(tag):
         hash = hashlib.md5(tag.namespace.encode('utf8')).hexdigest()[::6]
         return "#" + hash
 
+@blueprint.app_template_global(name="all_tags")
+def all_tags():
+    return Tag.query.order_by(Tag.namespace, Tag.name).all()
+
 def clear(tag):
     if not tag.images:
         db.session.delete(tag)
@@ -52,7 +56,6 @@ def clear(tag):
 @blueprint.route("")
 def tags():
     all_tags = Tag.query.order_by(Tag.namespace, Tag.name).all()
-    print(all_tags)
     return render_template("all_tags.html", tags=all_tags)
 
 @blueprint.route("/<tag_name>")
