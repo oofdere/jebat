@@ -1,11 +1,10 @@
 <form hx-post="{{ url_for('album.add', img_id=image.id) }}">
     <label for="album_chooser">Add to album:</label>
-    <input list="albums" id="album_chooser" name="choose_album" />
-    <datalist id="albums">
+    <select id="album_chooser" name="choose_album">
         {% for album in albums %}
         <option value="{{ album.id }}">{{ album.name }}</option>
         {% endfor %}
-    </datalist>
+    </select>
     <button type="submit">Add to Album</button>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
