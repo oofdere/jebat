@@ -1,0 +1,7 @@
+<form hx-post="{{url_for('tag.add')}}" hx-target="#tag_list">
+    <input type="hidden" name="image_id" value="{{image.id}}">
+    <input type="text" name="tag" unset>
+    <noscript>
+        <button type="submit">Add tag</button>
+    </noscript>
+</form>

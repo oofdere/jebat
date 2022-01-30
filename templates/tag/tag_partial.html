@@ -1,0 +1,11 @@
+<span>
+    {% if image %}
+    <a hx-get="{{url_for('tag.remove', tag_name=tag.name, image_id=image.id, namespace=tag.namespace)}}" hx-target="#tag_list" class="red">🆁</a> 
+    {% endif %}
+    <a href="{{url_for('tag.view', tag_name=tag_string(tag))}}" style="color: {{ color_from_tag(tag) }};">
+        {{ tag_string(tag) }}
+    </a>
+    <span class="secondary">
+        {{ tag.images | length -}}
+    </span>
+</span>

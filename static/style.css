@@ -20,3 +20,11 @@
     height: auto;
     object-fit: contain;
 }
+
+.secondary {
+    opacity: 70%;
+}
+
+.red {
+    color: #c40000;
+}

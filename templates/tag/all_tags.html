@@ -1,0 +1,9 @@
+{% extends "default.html" %}
+
+{% block content %}
+    <ol>
+        {% for tag in tags | sort(attribute='name') %}
+            <li>{% include "tag_partial.html" %}</li>
+        {% endfor %}
+    </ol>
+{% endblock %}

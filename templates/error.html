@@ -1,0 +1,12 @@
+{% extends "default.html" %}
+
+{% block content %}
+    <h1>HTTP {{error.code}}</h1>
+    <h2>{{error.name}}</h2>
+    <p>{{error.description}}</p>
+
+    <details>
+        <summary>More info</summary>
+        {{error.get_response()}}
+    </details>
+{% endblock %}

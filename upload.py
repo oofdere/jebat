@@ -39,6 +39,6 @@ def upload():
             f.seek(0)
             f.save(os.path.join(blueprint.root_path, env("IMAGE_DIR"), filename))
             thumbnail.create(filename)
-            return redirect(url_for("view", image_hash=image_hash))
+            return redirect(url_for("image.view", image_hash=image_hash))
     else:
         return render_template("upload.html", form=form)

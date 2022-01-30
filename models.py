@@ -13,6 +13,10 @@ image_to_album = db.Table('image_to_album',
                           db.Column('album_id', db.Integer, db.ForeignKey('album.id'))
                           )
 
+image_tag = db.Table('image_tag',
+    db.Column('image_id', db.Integer, db.ForeignKey('image.id')), 
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
+)
 
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +27,7 @@ class Image(db.Model):
     date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     in_album = db.relationship("Album", secondary=image_to_album, backref='images_in_album')
+    tags = db.relationship('Tag', secondary=image_tag, backref='images')
 
 
 class User(UserMixin, db.Model):
@@ -46,6 +51,13 @@ class Album(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.Text)
     description = db.Column(db.Text)
+
+
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    namespace = db.Column(db.Text)
+    color = db.Column(db.Text)
 
 
 @login_manager.user_loader
