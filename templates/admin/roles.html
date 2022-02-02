@@ -11,6 +11,7 @@
                 <td>{{user.username}}</td>
                 <td>
                     <form hx-post="{{ url_for('admin.roles') }}" hx-trigger="change">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         {% include "roles_partial.html" %}
                     </form>
                 </td>

@@ -3,6 +3,7 @@ from urllib import response
 
 from flask import Blueprint, Flask, render_template, send_file
 from flask_login import LoginManager, login_required
+from flask_wtf.csrf import CSRFProtect
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import HTTPException
@@ -15,6 +16,8 @@ app.config["SECRET_KEY"] = env("SECRET_KEY")
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login.login"
+
+csrf = CSRFProtect(app)
 
 from flask_migrate import Migrate
 

@@ -1,4 +1,5 @@
 <form hx-post="{{ url_for('album.add', img_id=image.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <label for="album_chooser">Add to album:</label>
     <select id="album_chooser" name="choose_album">
         {% for album in albums %}
