@@ -33,9 +33,9 @@ def signup():
     if form.validate_on_submit():
         user = User(
             username=form.username.data,
-            is_admin=bool(env("IS_ADMIN")),
-            can_view=bool(env("CAN_VIEW")),
-            can_upload=bool(env("CAN_UPLOAD"))
+            is_admin=bool(env("IS_ADMIN") == "True"),
+            can_view=bool(env("CAN_VIEW") == "True"),
+            can_upload=bool(env("CAN_UPLOAD") == "True")
         )
         user.set_password(form.password.data)
         db.session.add(user)
