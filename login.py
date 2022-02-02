@@ -1,3 +1,4 @@
+from xmlrpc.client import Boolean
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user
 
@@ -48,3 +49,14 @@ def signup():
 def logout():
     logout_user()
     return redirect(url_for(".login"))
+
+@blueprint.app_template_global(name="is_owner")
+def is_owner(object) -> Boolean:
+    # Checks if the current user owns a resource.
+    # Also returns true if the current user is an admin.
+    if object.user_id == current_user.id:
+        return True
+    elif current_user.is_admin:
+        return True
+    else:
+        return False

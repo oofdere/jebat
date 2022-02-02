@@ -1,12 +1,11 @@
 import hashlib
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, abort
 from sqlalchemy import and_, or_
+from login import is_owner
 
 from models import Tag, Image
 
 from app import db
-
-from sqlalchemy.sql import text
 
 blueprint = Blueprint('tag', __name__, template_folder='templates/tag')
 
@@ -66,23 +65,29 @@ def view(tag_name):
 @blueprint.route("/add", methods=["POST"])
 def add():
     # add a tag to an image
-    tag_name = request.form['tag']
-    tag = get(tag_name)
     image_id = request.form['image_id']
     image = Image.query.filter_by(id=image_id).first()
-    image.tags.append(tag)
-    db.session.commit()
-    return render_template("tag_list.html", tags=get_tags(image_id), image=image)
+    if is_owner(image):
+        tag_name = request.form['tag']
+        tag = get(tag_name)
+        image.tags.append(tag)
+        db.session.commit()
+        return render_template("tag_list.html", tags=get_tags(image_id), image=image)
+    else:
+        return abort(403)
 
 @blueprint.route("<namespace>:<tag_name>/remove/<image_id>")
 @blueprint.route("<tag_name>/remove/<image_id>", defaults={'namespace': None})
 def remove(namespace, tag_name, image_id):
     image = Image.query.filter_by(id=image_id).first()
-    tag = Tag.query.filter_by(name=tag_name, namespace=namespace).first()
-    image.tags.remove(tag)
-    db.session.commit()
-    clear(tag)
-    return render_template("tag_list.html", tags=get_tags(image_id), image=image)
+    if is_owner(image):
+        tag = Tag.query.filter_by(name=tag_name, namespace=namespace).first()
+        image.tags.remove(tag)
+        db.session.commit()
+        clear(tag)
+        return render_template("tag_list.html", tags=get_tags(image_id), image=image)
+    else:
+        return abort(403)
 
 @blueprint.route("image/<image_id>")
 def get_tags(image_id):

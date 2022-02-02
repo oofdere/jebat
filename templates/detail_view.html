@@ -4,13 +4,17 @@
     <aside>
         <nav>
             <p>{{ image.caption }}</p>
-            {% include "album_add_partial.html" %}
-            <hr />
-            {% include "tag/tag_add.html" %}
-            {% include "tag/tag_list.html" %}
-            <hr />
-            <strong>Actions</strong>
-            <form action="{{ url_for('image.delete', image_hash=image.hash) }}" method="POST"><button type="submit">Delete</button></form>
+            {% if is_owner(image) %}
+                {% include "album_add_partial.html" %}
+                <hr />
+                {% include "tag/tag_add.html" %}
+            {% endif %}
+                {% include "tag/tag_list.html" %}
+                <hr />
+            {% if is_owner(image) %}
+                <strong>Actions</strong>
+                <form action="{{ url_for('image.delete', image_hash=image.hash) }}" method="POST"><button type="submit">Delete</button></form>
+            {% endif %}
         </nav>
         
     </aside>
