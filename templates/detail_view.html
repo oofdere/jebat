@@ -5,9 +5,14 @@
         <nav>
             <p>{{ image.caption }}</p>
             {% include "album_add_partial.html" %}
+            <hr />
+            {% include "tag/tag_add.html" %}
+            {% include "tag/tag_list.html" %}
+            <hr />
+            <strong>Actions</strong>
+            <form action="{{ url_for('image.delete', image_hash=image.hash) }}" method="POST"><button type="submit">Delete</button></form>
         </nav>
-        {% include "tag/tag_add.html" %}
-        {% include "tag/tag_list.html" %}
+        
     </aside>
     <div role="document">
         <img src="/images/{{ image.hash }}.{{ image.extension }}" alt="view_image">
