@@ -28,7 +28,7 @@ migrate = Migrate(app, db)
 
 import admin
 import album
-import login
+import account
 import upload
 import image
 import tag
@@ -39,7 +39,7 @@ app.register_blueprint(upload.blueprint, url_prefix='/upload')
 app.register_blueprint(album.blueprint, url_prefix='/album')
 app.register_blueprint(image.blueprint, url_prefix='/image')
 app.register_blueprint(tag.blueprint, url_prefix='/tag')
-app.register_blueprint(login.blueprint, url_prefix='/')
+app.register_blueprint(account.blueprint, url_prefix='/')
 
 
 @app.route("/")

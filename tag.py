@@ -1,7 +1,7 @@
 import hashlib
 from flask import Blueprint, render_template, request, abort
 from sqlalchemy import and_, or_
-from login import is_owner
+from account import is_owner
 
 from models import Tag, Image
 

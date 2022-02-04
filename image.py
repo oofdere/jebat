@@ -7,7 +7,7 @@ from flask_login import fresh_login_required
 from app import db
 from decorators import can_view
 from helpers import env
-from login import is_owner
+from account import is_owner
 from models import Album, Image
 from tag import get_tags, remove
 
