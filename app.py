@@ -15,7 +15,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = env("SQLALCHEMY_DATABASE_URI")
 app.config["SECRET_KEY"] = env("SECRET_KEY")
 
 login_manager = LoginManager(app)
-login_manager.login_view = "login.login"
+login_manager.login_view = "account.login"
 
 csrf = CSRFProtect(app)
 
