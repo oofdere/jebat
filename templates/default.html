@@ -34,10 +34,10 @@
                 <li><a href="{{ url_for('admin.roles') }}">Roles</a></li>
             {% endif %}
             {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('login.logout') }}">Log out</a></li>
+                <li><a href="{{ url_for('account.logout') }}">Log out</a></li>
             {% else %}
-                <li><a href="{{ url_for('login.signup') }}">Sign up</a></li>
-                <li><a href="{{ url_for('login.logout') }}">Log in</a></li>
+                <li><a href="{{ url_for('account.signup') }}">Sign up</a></li>
+                <li><a href="{{ url_for('account.logout') }}">Log in</a></li>
             {% endif %}
         </ul>
     </nav>

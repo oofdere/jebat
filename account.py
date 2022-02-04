@@ -8,7 +8,7 @@ from forms import LoginForm, SignupForm
 from helpers import env, is_checked
 from models import User
 
-blueprint = Blueprint('login', __name__, template_folder='templates/account')
+blueprint = Blueprint('account', __name__, template_folder='templates/account')
 
 @blueprint.route("/@<username>")
 def view(username):

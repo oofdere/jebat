@@ -11,7 +11,7 @@ def can_view(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if current_user.is_authenticated == False:
-            return redirect(url_for("login.login"))
+            return redirect(url_for("account.login"))
         user = User.query.filter_by(id=current_user.id).first()
         if user.can_view:
             return f(*args, **kwargs)
@@ -23,7 +23,7 @@ def can_upload(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if current_user.is_authenticated == False:
-            return redirect(url_for("login.login"))
+            return redirect(url_for("account.login"))
         user = User.query.filter_by(id=current_user.id).first()
         if user.can_upload:
             return f(*args, **kwargs)
@@ -35,7 +35,7 @@ def is_admin(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if current_user.is_authenticated == False:
-            return redirect(url_for("login.login"))
+            return redirect(url_for("account.login"))
         user = User.query.filter_by(id=current_user.id).first()
         if user.is_admin:
             return f(*args, **kwargs)

@@ -4,7 +4,7 @@
     <aside>
         <nav>
             <p>{{ image.caption }}</p>
-            <p>Uploaded by <a href="{{ url_for('login.view', username=image.uploader.username) }}">@{{ image.uploader.username }}</a></p>
+            <p>Uploaded by <a href="{{ url_for('account.view', username=image.uploader.username) }}">@{{ image.uploader.username }}</a></p>
             {% if is_owner(image) %}
                 {% include "album_add_partial.html" %}
                 <hr />
