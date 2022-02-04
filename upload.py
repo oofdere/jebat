@@ -2,7 +2,7 @@ import hashlib
 import os
 from datetime import datetime
 
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, redirect, render_template, request, url_for, abort
 from flask_login import current_user
 from werkzeug.utils import secure_filename
 
@@ -12,6 +12,8 @@ from decorators import can_upload
 from forms import UploadForm
 from helpers import env
 from models import Image
+
+from sqlalchemy.exc import IntegrityError
 
 blueprint = Blueprint("upload", __name__, template_folder="templates/upload")
 
@@ -35,7 +37,11 @@ def upload():
                 user_id=current_user.id,
             )
             db.session.add(image)
-            db.session.commit()
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+                abort(500, "Image has already been uploaded.")
             f.seek(0)
             f.save(os.path.join(blueprint.root_path, env("IMAGE_DIR"), filename))
             thumbnail.create(filename)
