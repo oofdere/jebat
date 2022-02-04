@@ -1,0 +1,10 @@
+{% extends "default.html" %}
+
+{% block content %}
+    <h1>@{{ user.username }}</h1>
+    {% if images %}
+        {% include "gallery_partial.html" %}
+    {% else %}
+        <p>User @{{ user.username }} has not yet uploaded any images.</p>
+    {% endif %} 
+{% endblock %}

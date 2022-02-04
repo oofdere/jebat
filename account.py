@@ -1,5 +1,5 @@
 from xmlrpc.client import Boolean
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, abort
 from flask_login import current_user, login_user, logout_user
 
 from app import db
@@ -8,7 +8,15 @@ from forms import LoginForm, SignupForm
 from helpers import env, is_checked
 from models import User
 
-blueprint = Blueprint('login', __name__, template_folder='templates/login')
+blueprint = Blueprint('login', __name__, template_folder='templates/account')
+
+@blueprint.route("/@<username>")
+def view(username):
+    user = User.query.filter_by(username=username).first()
+    if user:
+        return render_template("user.html", user=user, images=user.uploads)
+    else:
+        abort(404, f"User @{username} does not exist.")
 
 
 @blueprint.route("/login", methods=["GET", "POST"])
