@@ -37,7 +37,7 @@ class User(UserMixin, db.Model):
     is_admin = db.Column(db.Boolean)
     can_upload = db.Column(db.Boolean)
     can_view = db.Column(db.Boolean)
-    uploads = db.relationship("Image", backref="images", lazy=True)
+    uploads = db.relationship("Image", backref="uploader", lazy=True)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
