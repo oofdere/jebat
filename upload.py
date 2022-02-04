@@ -26,7 +26,7 @@ def upload():
         if form.validate_on_submit():
             f = form.file.data
             filename = secure_filename(f.filename)
-            extension = filename.split(".")[1]
+            extension = filename.split(".")[-1]
             image_hash = hashlib.md5(f.read()).hexdigest()
             filename = image_hash + "." + extension
             image = Image(
