@@ -12,10 +12,11 @@
             {% endif %}
                 {% include "tag/tag_list.html" %}
                 <hr />
+            <strong>Actions</strong>
             {% if is_owner(image) %}
-                <strong>Actions</strong>
                 <form action="{{ url_for('image.delete', image_hash=image.hash) }}" method="POST"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/><button type="submit">Delete</button></form>
             {% endif %}
+            <a href="/images/{{ image.hash }}.{{ image.extension }}" download>Download</a>
         </nav>
         
     </aside>
