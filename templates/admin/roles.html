@@ -1,14 +1,19 @@
 {% extends "default.html" %}
 
 {% block content %}
-    <table>
+    <input type="text" placeholder="Filter users" 
+        _="
+            on keyup
+                show <tr/> in #users when its textContent contains my value
+        ">
+    <table id="users">
         <thead>
             <th>Username</th>
             <th>Permissions</th>
         </thead>
         {% for user in all_users %}
             <tr>
-                <td>{{user.username}}</td>
+                <td class="username">{{user.username}}</td>
                 <td>
                     <form hx-post="{{ url_for('admin.roles') }}" hx-trigger="change">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
