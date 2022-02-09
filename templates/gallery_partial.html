@@ -1,8 +1,8 @@
-<div class="gallery">
+<div class="gallery gap-8 columns-lg">
     {% for image in images %}
     <div class="gallery-item">
         <a href="{{ url_for('image.view', image_hash=image.hash) }}" data-tooltip="{{ image.caption }}">
-            <img src="{{ url_for('get_thumb', image_hash=image.hash, filename=image.hash+'.'+image.extension) }}" alt="{{ image.caption }}" />
+            <img src="{{ url_for('get_thumb', image_hash=image.hash, filename=image.hash+'.'+image.extension) }}" alt="{{ image.caption }}" class="w-full aspect-auto" />
         </a>
     </div>
     {% endfor %}
