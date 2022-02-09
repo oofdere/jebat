@@ -1,26 +1,28 @@
 {% extends "default.html" %}
 
 {% block content %}
-    <aside>
-        <nav>
-            <p>{{ image.caption }}</p>
-            <p>Uploaded by <a href="{{ url_for('account.view', username=image.uploader.username) | replace('%40', '@') }}">@{{ image.uploader.username }}</a></p>
-            {% if is_owner(image) %}
-                {% include "album_add_partial.html" %}
-                <hr />
-                {% include "tag/tag_add.html" %}
-            {% endif %}
-                {% include "tag/tag_list.html" %}
-                <hr />
-            <strong>Actions</strong>
-            {% if is_owner(image) %}
-                <form action="{{ url_for('image.delete', image_hash=image.hash) }}" method="POST"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/><button type="submit">Delete</button></form>
-            {% endif %}
-            <a href="/images/{{ image.hash }}.{{ image.extension }}" download>Download</a>
-        </nav>
-        
-    </aside>
-    <div role="document">
-        <img src="/images/{{ image.hash }}.{{ image.extension }}" alt="view_image">
+    <div class="flex flex-row gap-8">
+        <aside class="flex-auto">
+            <nav>
+                <p>{{ image.caption }}</p>
+                <p>Uploaded by <a href="{{ url_for('account.view', username=image.uploader.username) | replace('%40', '@') }}">@{{ image.uploader.username }}</a></p>
+                {% if is_owner(image) %}
+                    {% include "album_add_partial.html" %}
+                    <hr />
+                    {% include "tag/tag_add.html" %}
+                {% endif %}
+                    {% include "tag/tag_list.html" %}
+                    <hr />
+                <strong>Actions</strong>
+                {% if is_owner(image) %}
+                    <form action="{{ url_for('image.delete', image_hash=image.hash) }}" method="POST"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/><button type="submit">Delete</button></form>
+                {% endif %}
+                <a href="/images/{{ image.hash }}.{{ image.extension }}" download>Download</a>
+            </nav>
+            
+        </aside>
+        <div role="document" class="flex-auto">
+            <img src="/images/{{ image.hash }}.{{ image.extension }}" alt="view_image" class="w-full">
+        </div>
     </div>
 {% endblock %}
