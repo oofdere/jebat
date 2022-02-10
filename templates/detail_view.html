@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="flex flex-row gap-8">
-        <aside class="flex-auto">
+        <aside class="flex-shrink">
             <nav>
                 <p>{{ image.caption }}</p>
                 <p>Uploaded by <a href="{{ url_for('account.view', username=image.uploader.username) | replace('%40', '@') }}">@{{ image.uploader.username }}</a></p>
