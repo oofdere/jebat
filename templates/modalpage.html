@@ -1,0 +1,31 @@
+{% set title_block %}
+    {% block title %}JEBAT{% endblock %}
+{% endset %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title_block}}</title>
+    <!--<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">-->
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="shortcut icon" type="image/png" href="/static/favicon.png">
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.4"></script>
+</head>
+<body>
+    <main class="flex flex-col justify-center items-center h-screen bg-gradient-to-t from-[#454545]">
+        <div class="max-w-sm">
+            <img src="/static/logo.png" class="m-auto">
+        </div>
+        <div class="">
+            <div class="mx-auto max-w-sm bg-white border-4 border-black">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </main>
+</body>
+</html>

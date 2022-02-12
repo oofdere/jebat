@@ -634,6 +634,10 @@ select {
   --tw-backdrop-sepia:  ;
 }
 
+.m-auto {
+  margin: auto !important;
+}
+
 .mx-auto {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -663,16 +667,32 @@ select {
   aspect-ratio: auto !important;
 }
 
+.h-screen {
+  height: 100vh !important;
+}
+
 .w-full {
   width: 100% !important;
+}
+
+.max-w-sm {
+  max-width: 24rem !important;
 }
 
 .flex-auto {
   flex: 1 1 auto !important;
 }
 
+.flex-1 {
+  flex: 1 1 0% !important;
+}
+
 .flex-shrink {
   flex-shrink: 1 !important;
+}
+
+.basis-1\/2 {
+  flex-basis: 50% !important;
 }
 
 .columns-lg {
@@ -684,8 +704,16 @@ select {
   flex-direction: row !important;
 }
 
+.flex-col {
+  flex-direction: column !important;
+}
+
 .items-center {
   align-items: center !important;
+}
+
+.justify-center {
+  justify-content: center !important;
 }
 
 .justify-between {
@@ -698,6 +726,29 @@ select {
 
 .gap-8 {
   gap: 2rem !important;
+}
+
+.border-4 {
+  border-width: 4px !important;
+}
+
+.border-black {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
+}
+
+.bg-white {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+
+.bg-gradient-to-t {
+  background-image: linear-gradient(to top, var(--tw-gradient-stops)) !important;
+}
+
+.from-\[\#454545\] {
+  --tw-gradient-from: #454545 !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(69 69 69 / 0)) !important;
 }
 
 .container {
