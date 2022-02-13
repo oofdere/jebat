@@ -638,9 +638,22 @@ select {
   margin: auto !important;
 }
 
+.m-4 {
+  margin: 1rem !important;
+}
+
+.m-2 {
+  margin: 0.5rem !important;
+}
+
 .mx-auto {
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+.my-2 {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .block {
@@ -740,6 +753,10 @@ select {
   border-width: 4px !important;
 }
 
+.border-2 {
+  border-width: 2px !important;
+}
+
 .border-black {
   --tw-border-opacity: 1 !important;
   border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
@@ -761,6 +778,56 @@ select {
 
 .p-4 {
   padding: 1rem !important;
+}
+
+.text-2xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+
+.text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+
+.text-2xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+
+.text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+
+.text-2xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+
+.text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+
+.text-2xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+
+.text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+
+.text-2xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+
+.text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
 }
 
 .container {
