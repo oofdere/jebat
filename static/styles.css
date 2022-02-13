@@ -656,6 +656,11 @@ select {
   margin-bottom: 0.5rem !important;
 }
 
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .block {
   display: block !important;
 }
@@ -672,6 +677,10 @@ select {
   display: table !important;
 }
 
+.contents {
+  display: contents !important;
+}
+
 .hidden {
   display: none !important;
 }
@@ -682,6 +691,20 @@ select {
 
 .h-screen {
   height: 100vh !important;
+}
+
+.min-h-full {
+  min-height: 100% !important;
+}
+
+.min-h-max {
+  min-height: -webkit-max-content !important;
+  min-height: -moz-max-content !important;
+  min-height: max-content !important;
+}
+
+.min-h-full {
+  min-height: 100% !important;
 }
 
 .w-full {
@@ -708,12 +731,64 @@ select {
   max-width: 24rem !important;
 }
 
+.max-w-screen-sm {
+  max-width: 640px !important;
+}
+
 .flex-auto {
   flex: 1 1 auto !important;
 }
 
 .flex-shrink {
   flex-shrink: 1 !important;
+}
+
+.grow {
+  flex-grow: 1 !important;
+}
+
+.basis-96 {
+  flex-basis: 24rem !important;
+}
+
+.basis-0 {
+  flex-basis: 0px !important;
+}
+
+.basis-96 {
+  flex-basis: 24rem !important;
+}
+
+.basis-0 {
+  flex-basis: 0px !important;
+}
+
+.basis-96 {
+  flex-basis: 24rem !important;
+}
+
+.basis-0 {
+  flex-basis: 0px !important;
+}
+
+.basis-96 {
+  flex-basis: 24rem !important;
+}
+
+.basis-0 {
+  flex-basis: 0px !important;
+}
+
+.basis-96 {
+  flex-basis: 24rem !important;
+}
+
+.basis-0 {
+  flex-basis: 0px !important;
+}
+
+.basis-96 {
+  flex-basis: 24rem !important;
 }
 
 .columns-lg {
@@ -741,6 +816,10 @@ select {
   justify-content: space-between !important;
 }
 
+.justify-evenly {
+  justify-content: space-evenly !important;
+}
+
 .gap-2 {
   gap: 0.5rem !important;
 }
@@ -749,12 +828,60 @@ select {
   gap: 2rem !important;
 }
 
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.gap-8 {
+  gap: 2rem !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.gap-8 {
+  gap: 2rem !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.gap-8 {
+  gap: 2rem !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.gap-8 {
+  gap: 2rem !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.gap-8 {
+  gap: 2rem !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
 .border-4 {
   border-width: 4px !important;
 }
 
 .border-2 {
   border-width: 2px !important;
+}
+
+.border-4 {
+  border-width: 4px !important;
 }
 
 .border-black {
@@ -778,6 +905,10 @@ select {
 
 .p-4 {
   padding: 1rem !important;
+}
+
+.text-center {
+  text-align: center !important;
 }
 
 .text-2xl {

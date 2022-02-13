@@ -17,32 +17,7 @@
 </head>
 <body>
     <main class="container mx-auto">
-        <nav class="flex flex-row justify-between items-center">
-            <ul>
-                <li><a href="/"><img src="/static/logo.png" width="360"></a></img></li>
-            </ul> 
-            <ul class="inline-flex flex-row gap-2">
-                <li><a href="/">Home</a></li>
-                {% if current_user.can_upload %}
-                    <li><a href="{{ url_for('upload.upload') }}">Upload</a></li>
-                {% endif %}
-                {% if current_user.can_view %}
-                    <li><a href="{{ url_for('tag.tags') }}">Tags</a></li>
-                {% endif %}
-                {% if current_user.can_view %}
-                    <li><a href="{{ url_for('album.albums') }}">Albums</a></li>
-                {% endif %}
-                {% if current_user.is_admin %}
-                    <li><a href="{{ url_for('admin.roles') }}">Roles</a></li>
-                {% endif %}
-                {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('account.logout') }}">Log out</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('account.signup') }}">Sign up</a></li>
-                    <li><a href="{{ url_for('account.logout') }}">Log in</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+        {% include "layout/navbar.html" %}
         {% block content %}
         {% endblock %}
     </main>
