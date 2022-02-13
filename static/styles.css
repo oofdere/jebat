@@ -675,6 +675,22 @@ select {
   width: 100% !important;
 }
 
+.w-1\/2 {
+  width: 50% !important;
+}
+
+.min-w-full {
+  min-width: 100% !important;
+}
+
+.max-w-sm {
+  max-width: 24rem !important;
+}
+
+.max-w-full {
+  max-width: 100% !important;
+}
+
 .max-w-sm {
   max-width: 24rem !important;
 }
@@ -683,16 +699,8 @@ select {
   flex: 1 1 auto !important;
 }
 
-.flex-1 {
-  flex: 1 1 0% !important;
-}
-
 .flex-shrink {
   flex-shrink: 1 !important;
-}
-
-.basis-1\/2 {
-  flex-basis: 50% !important;
 }
 
 .columns-lg {
@@ -751,6 +759,10 @@ select {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(69 69 69 / 0)) !important;
 }
 
+.p-4 {
+  padding: 1rem !important;
+}
+
 .container {
   width: 100%;
 }
@@ -790,4 +802,218 @@ a {
   color: rgb(37 99 235 / var(--tw-text-opacity));
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
+}
+
+@media (min-width: 768px) {
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:grid {
+    display: grid !important;
+  }
+
+  .md\:max-w-none {
+    max-width: none !important;
+  }
+
+  .md\:grid-flow-row {
+    grid-auto-flow: row !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:grid-flow-col {
+    grid-auto-flow: column !important;
+  }
+
+  .md\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .md\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .md\:items-stretch {
+    align-items: stretch !important;
+  }
+
+  .md\:items-stretch {
+    align-items: stretch !important;
+  }
+
+  .md\:items-stretch {
+    align-items: stretch !important;
+  }
+
+  .md\:items-stretch {
+    align-items: stretch !important;
+  }
+
+  .md\:items-stretch {
+    align-items: stretch !important;
+  }
+
+  .md\:justify-evenly {
+    justify-content: space-evenly !important;
+  }
+
+  .md\:justify-items-center {
+    justify-items: center !important;
+  }
+
+  .md\:justify-items-stretch {
+    justify-items: stretch !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+
+  .md\:bg-white {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid {
+    display: grid !important;
+  }
+
+  .lg\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .lg\:justify-evenly {
+    justify-content: space-evenly !important;
+  }
 }
