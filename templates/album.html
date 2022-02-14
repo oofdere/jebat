@@ -2,5 +2,14 @@
 
 {% block content %}
     <h1>Album: {{ album.name }}</h1>
+    <form action="{{ url_for('album.view', album_id=album.id) }}">
+        <label for="sort_chooser">Sort By:</label>
+        <select id="sort_chooser" name="sort_type">
+            <option value="old">Oldest</option>
+            <option value="new">Newest</option>
+            <option value="popular">Most Popular</option>
+        </select>
+        <button type="submit" style="width: auto !important;">Sort</button>
+    </form>
     {% include "gallery_partial.html" %}
 {% endblock %}
