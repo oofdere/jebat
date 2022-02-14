@@ -1,7 +1,9 @@
 {% macro navbar_link(name, url) %}
-    <li class="contents">
-        <a class="basis-0 grow min-h-full text-center border-black border-4" href="{{url}}">{{name}}</a>
-    </li>
+    <a class="basis-0 grow min-h-full text-center border-black border-4" href="{{url}}">
+        <li class="">
+            {{name}}
+        </li>
+    </a>
 {% endmacro %}
 
 <nav class="container mx-auto flex flex-row flex-wrap gap-8">
