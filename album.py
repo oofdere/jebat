@@ -1,6 +1,8 @@
 from flask import (Blueprint, Markup, flash, redirect, render_template,
                    request, url_for)
 from flask_login import current_user
+from sqlalchemy import desc
+from sqlalchemy.util.topological import sort
 
 from app import db
 from decorators import can_view
@@ -38,8 +40,16 @@ def new():
 @can_view
 def view(album_id):
     album = Album.query.filter_by(id=album_id).first()
-    images = album.images_in_album
-    return render_template("album.html", album=album, images=images)
+    sort_type = request.args.get('sort_type')
+    if sort_type == "old":
+        images = Image.query.with_parent(album).order_by(Image.date)
+    elif sort_type == "new":
+        images = Image.query.with_parent(album).order_by(desc(Image.date))
+    else:
+        print("sort by popularity")
+        images = Image.query.with_parent(album)
+    print(images)
+    return render_template("album.html", album=album, images=images, sort_type=sort_type)
 
 
 @blueprint.route("/add/<int:img_id>", methods=["POST"])

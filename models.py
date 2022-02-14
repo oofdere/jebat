@@ -26,7 +26,7 @@ class Image(db.Model):
     exif = db.Column(db.Text)
     date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    in_album = db.relationship("Album", secondary=image_to_album, backref='images_in_album')
+    in_album = db.relationship("Album", secondary=image_to_album, lazy='dynamic', backref='images_in_album')
     tags = db.relationship('Tag', secondary=image_tag, backref='images')
 
 
