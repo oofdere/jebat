@@ -1,6 +1,7 @@
 {% extends "modalpage.html" %}
 
 {% block content %}
+<<<<<<< HEAD
 <form action="{{ url_for('account.login') }}" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p>
@@ -15,4 +16,33 @@
     <p>{{ form.submit() }}</p>
     <a href="{{ url_for('account.signup') }}">Sign up</a>
 </form>
+=======
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages%}
+                <div class="alert alert-error">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('account.login') }}" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-control">
+            {{ form.username.label }}
+            {{ form.username(class_="input input-bordered w-full") }}
+        </div>
+        <div class="form-control">
+            {{ form.password.label }}
+            {{ form.password(class_="input input-bordered w-full") }}
+        </div>
+        <div class="form-control flex-row">
+            {{ form.submit(class_="btn btn-primary") }}
+            <div class="">
+                {{ form.remember(class_="checkbox text-right") }}
+                {{ form.remember.label(class_="label-text") }}
+            </div>
+            
+        </div>
+        
+    </form>
+>>>>>>> 41b06d2c0e9a119de35118778680f3eb6b58ad84
 {% endblock %}

@@ -7,8 +7,10 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('@tailwindcss/forms'),
-
+    require("@tailwindcss/typography"),
+    require("daisyui"),
   ],
-  important: true,
+  daisyui: {
+    themes: false,
+  },
 }

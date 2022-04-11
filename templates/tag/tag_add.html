@@ -1,7 +1,7 @@
 <form hx-post="{{url_for('tag.add')}}" hx-target="#tag_list">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <input type="hidden" name="image_id" value="{{image.id}}">
-    <input type="text" list="tags" id="add_tag" name="tag" placeholder="Add tag" unset>
+    <input class="input input-bordered input-sm w-full" type="text" list="tags" id="add_tag" name="tag" placeholder="Add tag" unset>
     <datalist id="tags">
         {% for tag in all_tags() %}
             <option>{{ tag_string(tag) }}</option>

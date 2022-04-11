@@ -46,7 +46,7 @@ def view(album_id):
     elif sort_type == "new":
         images = Image.query.with_parent(album).order_by(desc(Image.date))
     else:
-        images = sorted(Image.query.with_parent(album))
+        images = Image.query.with_parent(album)
         print(images)
         for i in images:
             print(i.likes)
