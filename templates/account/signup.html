@@ -1,20 +1,27 @@
-{% extends "default.html" %}
+{% extends "modalpage.html" %}
 
 {% block content %}
-<form action="{{ url_for('account.signup') }}" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.username.label }}
-        {{ form.username() }}
-    </p>
-    <p>
-        {{ form.password.label }}
-        {{ form.password() }}
-    </p>
-    <p>
-        {{ form.password2.label }}
-        {{ form.password2() }}
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages%}
+                <div class="alert alert-error">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('account.signup') }}" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-control">
+            {{ form.username.label }}
+            {{ form.username(class_="input input-bordered w-full") }}
+        </div>
+        <div class="form-control">
+            {{ form.password.label }}
+            {{ form.password(class_="input input-bordered w-full") }}
+        </div>
+        <div class="form-control">
+            {{ form.password2.label }}
+            {{ form.password2(class_="input input-bordered w-full") }}
+        </div>
+        <div class="form-control">{{ form.submit(class_="btn btn-primary") }}</div>
+    </form>
 {% endblock %}
