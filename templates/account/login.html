@@ -13,5 +13,6 @@
     </p>
     <p>{{ form.remember() }} {{ form.remember.label }}</p>
     <p>{{ form.submit() }}</p>
+    <a href="{{ url_for('account.signup') }}">Sign up</a>
 </form>
 {% endblock %}

@@ -1,9 +1,14 @@
-<div class="gallery gap-8 columns-lg">
+<div class="gallery gap-8 columns-2xs m-3 md:m-0">
     {% for image in images %}
-    <div class="gallery-item">
-        <a href="{{ url_for('image.view', image_hash=image.hash) }}" data-tooltip="{{ image.caption }}">
-            <img src="{{ url_for('get_thumb', image_hash=image.hash, filename=image.hash+'.'+image.extension) }}" alt="{{ image.caption }}" class="w-full aspect-auto" />
-        </a>
-    </div>
+    <form method="POST" action="{{ url_for("image.like_image", image_hash=image.hash) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="gallery-item">
+            <a href="{{ url_for('image.view', image_hash=image.hash) }}" data-tooltip="{{ image.caption }}">
+                <img src="{{ url_for('get_thumb', image_hash=image.hash, filename=image.hash+'.'+image.extension) }}" alt="{{ image.caption }}" class="w-full aspect-auto" />
+            </a>
+            <button style="border: 2px solid black;margin-top: 1%;" type="submit">👍</button>
+            {{ image.likes|length }}
+        </div>
+    </form>
     {% endfor %}
 </div>

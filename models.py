@@ -7,16 +7,21 @@ from app import login_manager
 
 db = SQLAlchemy()
 
-
 image_to_album = db.Table('image_to_album',
                           db.Column('image_id', db.Integer, db.ForeignKey('image.id')),
                           db.Column('album_id', db.Integer, db.ForeignKey('album.id'))
                           )
 
 image_tag = db.Table('image_tag',
-    db.Column('image_id', db.Integer, db.ForeignKey('image.id')), 
-    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
-)
+                     db.Column('image_id', db.Integer, db.ForeignKey('image.id')),
+                     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
+                     )
+
+image_like = db.Table('image_like',
+                      db.Column('image_id', db.Integer, db.ForeignKey('image.id')),
+                      db.Column('like_id', db.Integer, db.ForeignKey('like.id'))
+                      )
+
 
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,7 +32,11 @@ class Image(db.Model):
     date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     in_album = db.relationship("Album", secondary=image_to_album, lazy='dynamic', backref='images_in_album')
-    tags = db.relationship('Tag', secondary=image_tag, backref='images')
+    tags = db.relationship("Tag", secondary=image_tag, backref='images')
+    likes = db.relationship("Like", secondary=image_like, backref='in_image')
+
+    def get_all_likes(self):
+        return len(self.likes)
 
 
 class User(UserMixin, db.Model):
@@ -58,6 +67,14 @@ class Tag(db.Model):
     name = db.Column(db.Text)
     namespace = db.Column(db.Text)
     color = db.Column(db.Text)
+
+
+# thinking of adding a value row which would either be 1 or -1, which would correspond to a like
+# or a dislike. then just taking the sum of all likes to get the average rating
+class Like(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    image_id = db.Column(db.Integer, db.ForeignKey('image.id'), nullable=False)
 
 
 @login_manager.user_loader

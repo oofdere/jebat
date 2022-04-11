@@ -7,7 +7,7 @@ from sqlalchemy.util.topological import sort
 from app import db
 from decorators import can_view
 from forms import AlbumForm
-from models import Album, Image
+from models import Album, Image, Like
 
 blueprint = Blueprint('album', __name__, template_folder='templates/album')
 
@@ -46,9 +46,10 @@ def view(album_id):
     elif sort_type == "new":
         images = Image.query.with_parent(album).order_by(desc(Image.date))
     else:
-        print("sort by popularity")
-        images = Image.query.with_parent(album)
-    print(images)
+        images = sorted(Image.query.with_parent(album))
+        print(images)
+        for i in images:
+            print(i.likes)
     return render_template("album.html", album=album, images=images, sort_type=sort_type)
 
 

@@ -62,11 +62,13 @@ def get_thumb(filename):
     filepath = os.path.join(app.root_path, env("THUMB_DIR"), secure_filename(filename))
     return send_file(filepath, mimetype='image/jpeg')
 
+
 @app.route("/images/<filename>")
 @can_view
 def get_image(filename):
     filepath = os.path.join(app.root_path, env("IMAGE_DIR"), secure_filename(filename))
     return send_file(filepath)
+
 
 blueprint = Blueprint('images', __name__, static_url_path='/images', static_folder='images/')
 app.register_blueprint(blueprint)
